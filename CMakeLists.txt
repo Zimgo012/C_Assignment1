@@ -3,4 +3,7 @@ project(C_Assignment1 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(C_Assignment1 main.c)
+add_executable(C_Assignment1 main.c
+        printMap.h
+        printMap.c
+)
