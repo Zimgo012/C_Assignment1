@@ -1,39 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+
+/*Map*/
+int mapWidth;
+int mapHeight;
+char ***map;
+
+/*Treasure*/
+int randomXAxis;
+int randomYAxis;
+int numTreasures;
+char **treasures;
+
+/*User Input*/
+int choice;
+int digCoordX;
+int digCoordY;
+
+/*Situation*/
+bool isTreasureFound;
+
+/*Setting*/
+int cheatModeToggle;
+
+
+/*Loop Variables for looping*/
+int i;
+int j;
+int x;
+int y;
 
 #define MAX_CODE_NUMBER 4
 int main(void) {
 
-    /*Map*/
-    int mapWidth;
-    int mapHeight;
-    int **map;
 
-    /*Treasure*/
-    int randomXAxis;
-    int randomYAxis;
-
-
-    int numTreasures;
-    char **treasures;
-
-
-    /*Digging*/
-    int digCoordX;
-    int digCoordY;
-
-
-
-    /*Setting*/
-    int choice;
-    int cheatModeToggle;
-
-
-    /*Loop Variables for looping*/
-    int i;
-    int j;
-    int x;
-    int y;
 
     /*Intro*/
     printf("Enter Map Width\n");
@@ -50,11 +51,16 @@ int main(void) {
         treasures[i] = (char *) malloc(MAX_CODE_NUMBER * sizeof(char));
     }
 
-    /*Initializing Map*/
-    map = (int **)malloc(mapHeight * sizeof(int *));
+    /*Initializing Map (2d array of int*/
+    map = (char ***)malloc(mapHeight * sizeof(char **));
     for (i = 0; i < mapHeight; i++) {
-        map[i] = (int *)malloc(mapWidth * sizeof(int));
+        map[i] = (char **)malloc(mapWidth * sizeof(char *));
+        for(j = 0; j < mapWidth; j++) {
+            map[i][j] = NULL;
+        }
     }
+
+
 
     /*Setting codes*/
     /*Random Loc for Treasures*/
@@ -65,7 +71,7 @@ int main(void) {
         printf("Enter treasure #%d code: ", i+1);
         scanf("%s", treasures[i]);
 
-        map[randomXAxis][randomYAxis] = 2;
+        map[randomXAxis][randomYAxis] = treasures[i];
 
     }
 
@@ -76,7 +82,7 @@ int main(void) {
     /*Printing Map*/
     printf("Map: \n");
 
-    /*Printing X indicator*/
+    /*Printing X Grid indicator*/
     printf("   ");
     for(x = 0; x < mapWidth; x++) {
         printf("%d",x / 10);
@@ -93,20 +99,24 @@ int main(void) {
         printf("-");
     }
 
-    /*Printing Y Indicator*/
+    /*Printing Y Grid Indicator*/
     printf("\n");
     for(y=0; y < mapHeight; y++) {
         printf("%d",y/10);
         printf("%d|",y%10);
+        /*Printing map*/
         for (x=0; x < mapWidth; x++) {
-            printf("%d",map[x][y]);
+            if(map[y][x] != NULL) {
+                printf("x");
+            }else {
+                printf(".");
+            }
+
         }
         printf("\n");
 
     }
 
-
-    /*Menu*/
 
 
     /*Free*/
