@@ -9,6 +9,8 @@
 #define MAX_SIZE_MAP 32
 #define MAX_CODE_NUMBER 4
 
+ bool checkEOF();
+
 int main(void) {
     /*Setting*/
     bool isCheatModeOn = false;
@@ -38,7 +40,7 @@ int main(void) {
     int i, j;
 
     /*Intro*/
-    while(!isValidHeight) {
+    while(!isValidHeight ) {
         printf("Enter Map Height\n");
         scanf("%d", &mapHeight);
 
@@ -265,6 +267,10 @@ int main(void) {
     free(treasures);
 
 return EXIT_SUCCESS;
+}
+
+bool checkEOF() {
+
 }
 
 
