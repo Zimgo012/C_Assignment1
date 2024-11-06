@@ -6,4 +6,6 @@ set(CMAKE_C_STANDARD 99)
 add_executable(C_Assignment1 main.c
         printMap.h
         printMap.c
+        checkEOF.c
+        checkEOF.h
 )

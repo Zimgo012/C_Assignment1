@@ -1,5 +1,8 @@
 # ninja log v6
-9	459	1730744080016620260	CMakeFiles/C_Assignment1.dir/main.c.o	fbbe4c6ddc6fbaef
-459	677	1730744080467379248	C_Assignment1	81e4f720e5fb5a3
-1	53	1730869822625124260	build.ninja	b598ab8f58d6fca2
 0	210	1730231744126153579	CMakeFiles/C_Assignment1.dir/printMap.c.o	7717c345143910e8
+1	65	1730915540662170793	build.ninja	b598ab8f58d6fca2
+284	412	1730915524370239148	C_Assignment1	b0fd0568085ef02b
+3	283	1730915524089421015	CMakeFiles/C_Assignment1.dir/main.c.o	fbbe4c6ddc6fbaef
+1	144	1730914901988530263	CMakeFiles/C_Assignment1.dir/checkEOF.c.o	de70c7070fc4b24b
+2	284	1730915607091490370	CMakeFiles/C_Assignment1.dir/main.c.o	fbbe4c6ddc6fbaef
+285	418	1730915607374266336	C_Assignment1	b0fd0568085ef02b

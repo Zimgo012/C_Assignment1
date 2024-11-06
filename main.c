@@ -4,12 +4,12 @@
 #include <string.h>
 
 #include "printMap.h"
+#include "checkEOF.h"
 
 #define MIN_SIZE_MAP 2
 #define MAX_SIZE_MAP 32
 #define MAX_CODE_NUMBER 4
 
- bool checkEOF();
 
 int main(void) {
     /*Setting*/
@@ -40,9 +40,13 @@ int main(void) {
     int i, j;
 
     /*Intro*/
-    while(!isValidHeight ) {
+    while (!isValidHeight) {
         printf("Enter Map Height\n");
-        scanf("%d", &mapHeight);
+
+        /*check for EOF*/
+        if (checkEOFint(&mapHeight)) {
+            return 0;
+        }
 
         if(mapHeight< MIN_SIZE_MAP || mapHeight > MAX_SIZE_MAP) {
             printf("Invalid Map Height. Input 2 - 32 only!\n");
@@ -53,8 +57,13 @@ int main(void) {
     }
 
     while(!isValidWidth) {
+
             printf("Enter Map Width\n");
-            scanf("%d", &mapWidth);
+
+            /*check for EOF*/
+            if(checkEOFint(&mapWidth)) {
+                return 0;
+            }
 
             if(mapWidth < MIN_SIZE_MAP || mapWidth > MAX_SIZE_MAP) {
                 printf("Invalid Map Width. Input 2 - 32 only!\n");
@@ -67,10 +76,14 @@ int main(void) {
 
     while(!isValidNumberOfTreasures) {
         printf("Enter number of treasures to add: \n");
-        scanf("%d", &numTreasures);
+
+        /*check for EOF*/
+        if(checkEOFint(&numTreasures)) {
+            return 0;
+        }
 
             if(numTreasures > mapWidth || numTreasures > mapHeight) {
-            printf("Invalid number of treasures. Input 2 - 32 only!\n");
+            printf("Invalid number of treasures!\n");
             isValidNumberOfTreasures = false;
             } else {
             isValidNumberOfTreasures = true;
@@ -83,6 +96,7 @@ int main(void) {
         printf("Memory allocation error!\n");
     }
 
+    /*Handling memory allocation error*/
     for (i = 0; i < numTreasures; i++) {
         treasures[i] = (char *) malloc(MAX_CODE_NUMBER * sizeof(char));
         if(treasures[i] == NULL) {
@@ -111,10 +125,11 @@ int main(void) {
     for(i = 0; i < numTreasures; i++) {
 
         isUniqueLocation = false;
-        isValidCode = false;for(i = 0; i < numTreasures; i++) {
-
-        isUniqueLocation = false;
         isValidCode = false;
+
+        for(i = 0; i < numTreasures; i++) {
+        isUniqueLocation = false; /*reset the flag every iteration*/
+        isValidCode = false;    /*reset the flag every iteration*/
 
         while(!isUniqueLocation) {
             randomXAxis = (rand() % mapWidth);
@@ -130,7 +145,19 @@ int main(void) {
         while(!isValidCode) {
 
         printf("Enter Treasure #%d code (e.g. T001): ",i + 1);
-        scanf("%s", treasures[i]);
+
+        /*input and check EOF*/
+        if(checkEOFstr(treasures[i])) {
+            for(i = 0; i < mapHeight; i++) {
+                free(map[i]);
+            }
+            for(i = 0; i < numTreasures; i++) {
+                free(treasures[i]);
+            }
+            free(map);
+            free(treasures);
+            return 0;
+        }
 
         /*Check for correct format*/
         if(treasures[i][0] == 'T' && strlen(treasures[i]) == MAX_CODE_NUMBER &&
@@ -158,11 +185,14 @@ int main(void) {
         }
     }
 
+        /*distributing codes into different location, codes cant be in the same location*/
         while(!isUniqueLocation) {
+
+            /*Getting random location*/
             randomXAxis = (rand() % mapWidth);
             randomYAxis = (rand() % mapHeight);
 
-            /*Checking if location is empty*/
+            /*Checking if location is empty, meaning that there is no code in this location and code can be put here  */
             if(map[randomYAxis][randomXAxis] == NULL) {
                 isUniqueLocation = true;
             }
@@ -172,7 +202,20 @@ int main(void) {
         while(!isValidCode) {
 
         printf("Enter Treasure #%d code (e.g. T001): ",i + 1);
-        scanf("%s", treasures[i]);
+
+        /*user input and checks EOF*/
+        if(checkEOFstr(treasures[i])) {
+            for(i = 0; i < mapHeight; i++) {
+                free(map[i]);
+            }
+            for(i = 0; i < numTreasures; i++) {
+                free(treasures[i]);
+            }
+
+            free(map);
+            free(treasures);
+            return 0;
+        }
 
         /*Check for correct format*/
         if(treasures[i][0] == 'T' && strlen(treasures[i]) == MAX_CODE_NUMBER &&
@@ -206,16 +249,52 @@ int main(void) {
         /*Menu*/
         printf("Enter Choice: \n");
         printf("1 - Dig at spot\t| 2 - Exit Game\t| 3 - Cheat!\n");
-        scanf("%d", &choice);
+
+        if(checkEOFint(&choice)) {
+            for(i = 0; i < mapHeight; i++) {
+                free(map[i]);
+            }
+            for(i = 0; i < numTreasures; i++) {
+                free(treasures[i]);
+            }
+            free(map);
+            free(treasures);
+            return 0;
+        }
 
         switch (choice) {
             case 1:
                 /*Sub Menu*/
                  printf("Where would you like to dig?\n");
                  printf("X = ");
-                 scanf("%d",&digCoordX);
+                 if(checkEOFint(&digCoordX)) {
+                     for(i = 0; i < mapHeight; i++) {
+                         if(map[i] != NULL) {
+                             free(map[i]);
+                         }
+                     }
+                     for(i = 0; i < numTreasures; i++) {
+                             free(treasures[i]);
+                     }
+                         free(map);
+                         free(treasures);
+                     return 0;
+                 }
                  printf("Y = ");
-                 scanf("%d",&digCoordY);
+
+                 if(checkEOFint(&digCoordY)) {
+                     for(i = 0; i < mapWidth; i++) {
+                         if(map[i] != NULL) {
+                             free(map[i]);
+                         }
+                     }
+                     for(i = 0; i < numTreasures; i++) {
+                        free(treasures[i]);
+                     }
+                     free(map);
+                     free(treasures);
+                     return 0;
+                 }
 
             /*Perform checking for each treasure if its equal to the digging coordinates*/
                 for(i = 0; i < numTreasures; i++) {
@@ -269,9 +348,6 @@ int main(void) {
 return EXIT_SUCCESS;
 }
 
-bool checkEOF() {
-
-}
 
 
 
