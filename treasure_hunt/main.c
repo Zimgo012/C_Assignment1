@@ -40,8 +40,6 @@ int main(void) {
     int isValidWidth = FALSE;
     int isValidHeight = FALSE;
     int isValidNumberOfTreasures = FALSE;
-    int isValidX = FALSE;
-    int isValidY = FALSE;
 
     /*Treasure*/
     int randomXAxis, randomYAxis, numTreasures;
@@ -49,7 +47,6 @@ int main(void) {
     int isValidCode = FALSE;
     int isUniqueLocation = FALSE;
     int isUnique = TRUE;
-
 
     /*User Input*/
     int choice, digCoordX, digCoordY;
@@ -239,26 +236,11 @@ int main(void) {
                  printf("Where would you like to dig?\n");
 
                  /*Geting input for x*/
-                while(!isValidX) {
                  printf("X = ");
                  if(checkEOFint(&digCoordX)) {
                      freeMem(map,mapHeight,treasures,numTreasures);
                      return EXIT_SUCCESS;
                  }
-
-                if(digCoordX > mapWidth || digCoordX < 0) {
-                    printf("Invalid coordinates.\n");
-                    isValidX = FALSE;
-
-                } else {
-                    isValidX = TRUE;
-                }
-                }
-
-
-                while(!isValidY) {
-
-
                  /*Getting input for y*/
                  printf("Y = ");
                  if(checkEOFint(&digCoordY)) {
@@ -266,14 +248,6 @@ int main(void) {
                      freeMem(map,mapHeight,treasures,numTreasures);
                      return EXIT_SUCCESS;
                  }
-
-                 if(digCoordY > mapHeight || digCoordY < 0) {
-                     printf("Invalid coordinates.\n");
-                     isValidY = FALSE;
-                 }else {
-                     isValidY = TRUE;
-                 }
-                }
 
             /*Perform checking for each treasure if its equal to the digging coordinates*/
                 for(i = 0; i < numTreasures; i++) {
