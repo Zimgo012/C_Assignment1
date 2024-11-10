@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -g -ansi -pedantic -Wall -Wextra
-FILES = printMap.o main.o checkEOF.o
+FILES = printMap.o main.o checkEOF.o freeMem.o
 OUT_EXE = Assignment1
 
 build: $(OUT_EXE)
@@ -13,6 +13,9 @@ printMap.o: printMap.c printMap.h
 
 checkEOF.o: checkEOF.c checkEOF.h
 	$(CC) $(CFLAGS) -c checkEOF.c
+
+freeMem.o: freeMem.c freeMem.h
+	$(CC) $(CFLAGS) -c freeMem.c
 
 main.o: main.c printMap.h
 	$(CC) $(CFLAGS) -c main.c

@@ -67,6 +67,12 @@ build CMakeFiles/C_Assignment1.dir/checkEOF.c.o: C_COMPILER__C_Assignment1_unsca
   OBJECT_DIR = CMakeFiles/C_Assignment1.dir
   OBJECT_FILE_DIR = CMakeFiles/C_Assignment1.dir
 
+build CMakeFiles/C_Assignment1.dir/freeMem.c.o: C_COMPILER__C_Assignment1_unscanned_Debug /Users/johnryccabelcina/Documents/Learning$ stuffs/ALGONQUIN$ COLLEGE$ CET-CST/SEM$ 3/C$ Language/C_Assignment1/freeMem.c || cmake_object_order_depends_target_C_Assignment1
+  DEP_FILE = CMakeFiles/C_Assignment1.dir/freeMem.c.o.d
+  FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/C_Assignment1.dir
+  OBJECT_FILE_DIR = CMakeFiles/C_Assignment1.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target C_Assignment1
@@ -75,7 +81,7 @@ build CMakeFiles/C_Assignment1.dir/checkEOF.c.o: C_COMPILER__C_Assignment1_unsca
 #############################################
 # Link the executable C_Assignment1
 
-build C_Assignment1: C_EXECUTABLE_LINKER__C_Assignment1_Debug CMakeFiles/C_Assignment1.dir/main.c.o CMakeFiles/C_Assignment1.dir/printMap.c.o CMakeFiles/C_Assignment1.dir/checkEOF.c.o
+build C_Assignment1: C_EXECUTABLE_LINKER__C_Assignment1_Debug CMakeFiles/C_Assignment1.dir/main.c.o CMakeFiles/C_Assignment1.dir/printMap.c.o CMakeFiles/C_Assignment1.dir/checkEOF.c.o CMakeFiles/C_Assignment1.dir/freeMem.c.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   OBJECT_DIR = CMakeFiles/C_Assignment1.dir
   POST_BUILD = :

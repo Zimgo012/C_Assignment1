@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 
-
+/*This function is to print the map*/
 void printMap(char ***map, int mapWidth, int mapHeight, bool isCheatModeOn) {
 
     /*Loop Variables*/

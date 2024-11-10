@@ -8,4 +8,5 @@ add_executable(C_Assignment1 main.c
         printMap.c
         checkEOF.c
         checkEOF.h
+        freeMem.c
 )
