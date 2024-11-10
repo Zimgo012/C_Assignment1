@@ -4,7 +4,7 @@
 
 
 /*This function is to print the map*/
-void printMap(char ***map, int mapWidth, int mapHeight, bool isCheatModeOn) {
+void printMap(char ***map, int mapWidth, int mapHeight, int isCheatModeOn) {
 
     /*Loop Variables*/
     int x,y;

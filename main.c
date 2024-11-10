@@ -1,6 +1,18 @@
+/**
+ *Treasure Hunt
+ *A CLI game to design and implement a dynamic memory-based treasure hunt game in C.
+ *
+ * Assignment 2
+ * Student Name:John Rycca Belcina
+ * Student ID: 041128039
+ * Program: Computer Engineering Technology - Computer Science
+* Course: C Language
+* Professor: Professor Shavit Lupo
+ */
+
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 
 #include "printMap.h"
@@ -10,29 +22,31 @@
 #define MIN_SIZE_MAP 2
 #define MAX_SIZE_MAP 32
 #define MAX_CODE_NUMBER 4
+#define TRUE 1
+#define FALSE 0
 
 /*Entry point and main function of the app*/
 int main(void) {
     /*Setting*/
-    bool isCheatModeOn = false;
+    int isCheatModeOn = FALSE;
 
     /*User Status*/
-    bool isAllTreasureFound = false;
+    int isAllTreasureFound = FALSE;
     int numberOfTreasuresFound =0;
 
     /*Map Setup*/
     int mapWidth, mapHeight;
     char ***map;
-    bool isValidWidth = false;
-    bool isValidHeight = false;
-    bool isValidNumberOfTreasures = false;
+    int isValidWidth = FALSE;
+    int isValidHeight = FALSE;
+    int isValidNumberOfTreasures = FALSE;
 
     /*Treasure*/
     int randomXAxis, randomYAxis, numTreasures;
     char **treasures;
-    bool isValidCode = false;
-    bool isUniqueLocation = false;
-    bool isUnique = true;
+    int isValidCode = FALSE;
+    int isUniqueLocation = FALSE;
+    int isUnique = TRUE;
 
     /*User Input*/
     int choice, digCoordX, digCoordY;
@@ -46,7 +60,7 @@ int main(void) {
 
         /*check for EOF*/
             if (checkEOFint(&mapHeight)) {
-                return 0;
+                return EXIT_SUCCESS;
             }
 
             /*checks if the number is valid*/
@@ -55,9 +69,9 @@ int main(void) {
 
             /*clears input buffer*/
             while (getchar() != '\n');
-            isValidHeight = false;
+            isValidHeight = FALSE;
             } else {
-            isValidHeight = true;
+            isValidHeight = TRUE;
             }
     }
 
@@ -67,7 +81,7 @@ int main(void) {
 
             /*check for EOF*/
             if(checkEOFint(&mapWidth)) {
-                return 0;
+                return EXIT_SUCCESS;
             }
 
             /*checks if the number is valid*/
@@ -76,9 +90,9 @@ int main(void) {
 
                 /*clears input buffer*/
                 while (getchar() != '\n');
-                isValidWidth = false;
+                isValidWidth = FALSE;
             } else {
-                isValidWidth = true;
+                isValidWidth = TRUE;
             }
         }
 
@@ -88,7 +102,7 @@ int main(void) {
 
         /*check for EOF*/
             if(checkEOFint(&numTreasures)) {
-                return 0;
+                return EXIT_SUCCESS;
             }
 
             /*checks if the number is valid*/
@@ -97,9 +111,9 @@ int main(void) {
 
                 /* clears he input buffer */
                 while (getchar() != '\n');
-                isValidNumberOfTreasures = false;
+                isValidNumberOfTreasures = FALSE;
             } else {
-                isValidNumberOfTreasures = true;
+                isValidNumberOfTreasures = TRUE;
             }
         }
 
@@ -149,8 +163,8 @@ int main(void) {
         /*Iterate through numbers of treasure */
         for(i = 0; i < numTreasures; i++) {
 
-        isUniqueLocation = false; /*reset the flag every iteration*/
-        isValidCode = false;    /*reset the flag every iteration*/
+        isUniqueLocation = FALSE; /*reset the flag every iteration*/
+        isValidCode = FALSE;    /*reset the flag every iteration*/
 
         /* while the memory address is not taken, set this address to be the storage for our new treasure*/
         while(!isUniqueLocation) {
@@ -159,7 +173,7 @@ int main(void) {
 
             /*Checking if location is empty*/
             if(map[randomYAxis][randomXAxis] == NULL) {
-                isUniqueLocation = true;
+                isUniqueLocation = TRUE;
             }
         }
 
@@ -171,7 +185,7 @@ int main(void) {
         /*input and check EOF*/
         if(checkEOFstr(treasures[i])) {
             freeMem(map,mapHeight,treasures,numTreasures);
-            return 0;
+            return EXIT_SUCCESS;
         }
 
         /*Check for correct format*/
@@ -182,18 +196,18 @@ int main(void) {
 
             /*Check if code is unique. Checks all the treasure being store and compare it to this
              *new treasure to be stored. It uses strcmp for comparing similiarity of the string*/
-            isUnique = true;
+            isUnique = TRUE;
             for (j = 0; j < i; j++) {
                 if (strcmp(treasures[i], treasures[j]) == 0) {
                     printf("Treasure code already in use.\n");
-                    isUnique = false;
+                    isUnique = FALSE;
                     break;
                 }
             }
 
             /* If the code is unique, set the treasure in the location */
             if(isUnique) {
-                isValidCode = true;
+                isValidCode = TRUE;
                 map[randomYAxis][randomXAxis] = treasures[i];
             }
 
@@ -202,8 +216,6 @@ int main(void) {
               }
         }
     }
-
-
 
     printMap(map,mapWidth,mapHeight,isCheatModeOn);
 
@@ -215,7 +227,7 @@ int main(void) {
 
         if(checkEOFint(&choice)) {
             freeMem(map,mapHeight,treasures,numTreasures);
-            return 0;
+            return EXIT_SUCCESS;
         }
 
         switch (choice) {
@@ -227,20 +239,20 @@ int main(void) {
                  printf("X = ");
                  if(checkEOFint(&digCoordX)) {
                      freeMem(map,mapHeight,treasures,numTreasures);
-                     return 0;
+                     return EXIT_SUCCESS;
                  }
                  /*Getting input for y*/
                  printf("Y = ");
                  if(checkEOFint(&digCoordY)) {
 
                      freeMem(map,mapHeight,treasures,numTreasures);
-                     return 0;
+                     return EXIT_SUCCESS;
                  }
 
             /*Perform checking for each treasure if its equal to the digging coordinates*/
                 for(i = 0; i < numTreasures; i++) {
                 if(map[digCoordY][digCoordX] == treasures[i]) {
-                    printf("Treasure #%d found! Code: %s\n", i+1,treasures[i]);
+                    printf("Treasure #%d found! Code: #%s\n", i+1,treasures[i]);
                     numberOfTreasuresFound++;
                     map[digCoordY][digCoordX] = "$";
                     break;
@@ -261,7 +273,7 @@ int main(void) {
                 return EXIT_SUCCESS;
 
             case 3:
-                isCheatModeOn = true;
+                isCheatModeOn = TRUE;
                 printf("Cheat Mode Enabled\n");
                 break;
             default:
@@ -269,7 +281,7 @@ int main(void) {
         }
         /*All treasures found!*/
         if(numberOfTreasuresFound == numTreasures) {
-            isAllTreasureFound = true;
+            isAllTreasureFound = TRUE;
             printf("Congratulations, you found all the treasure!\n");
         }
 

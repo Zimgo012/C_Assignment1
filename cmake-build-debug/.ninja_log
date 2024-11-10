@@ -30,3 +30,8 @@
 2	228	1731261358650385662	CMakeFiles/C_Assignment1.dir/freeMem.c.o	703983cc0d2b00c5
 1	228	1731261358649495869	CMakeFiles/C_Assignment1.dir/main.c.o	fbbe4c6ddc6fbaef
 228	335	1731261358876410691	C_Assignment1	878dc23bfbd1e7db
+1	215	1731261812291601720	CMakeFiles/C_Assignment1.dir/printMap.c.o	7717c345143910e8
+2	198	1731262525877738410	CMakeFiles/C_Assignment1.dir/checkEOF.c.o	de70c7070fc4b24b
+2	198	1731262525877608367	CMakeFiles/C_Assignment1.dir/printMap.c.o	7717c345143910e8
+2	198	1731262525877143657	CMakeFiles/C_Assignment1.dir/main.c.o	fbbe4c6ddc6fbaef
+199	292	1731262526074082628	C_Assignment1	878dc23bfbd1e7db

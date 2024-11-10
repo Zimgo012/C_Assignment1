@@ -1,9 +1,9 @@
 #ifndef CHECKEOF_H
 #define CHECKEOF_H
 
-#include <stdbool.h>
 
-bool checkEOFint(int *address);
-bool checkEOFstr(char *address);
+
+int checkEOFint(int *address);
+int checkEOFstr(char *address);
 
 #endif

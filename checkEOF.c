@@ -1,23 +1,25 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include "checkEOF.h"
 
+#define TRUE 1
+#define FALSE 0
+
 /*Passing in the memory location*/
-bool checkEOFint(int *address) {
+int checkEOFint(int *address) {
 
     if (scanf("%d", address) == EOF) {
         printf("EOF Detected\n");
-        return true;
+        return TRUE;
     }
-    return false;
+    return FALSE;
 }
 
-bool checkEOFstr(char *address) {
+int checkEOFstr(char *address) {
 
   if (scanf("%s", address) == EOF) {
     printf("EOF Detected\n");
-    return true;
+    return TRUE;
     }
 
-    return false;
+    return FALSE;
 }
